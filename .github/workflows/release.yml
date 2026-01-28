@@ -1,0 +1,68 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_notes:
+        description: "Release notes (optional)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: "1.25"
+
+      - name: Build all platforms
+        id: build
+        run: |
+          # Run the build and capture output
+          BUILD_OUTPUT=$(make all 2>&1 | tee /dev/stderr)
+
+          # Extract version from build output
+          VERSION=$(echo "$BUILD_OUTPUT" | grep -oP 'Version: \K[0-9]+-[0-9]+')
+
+          if [ -z "$VERSION" ]; then
+            echo "ERROR: Could not extract version from build output"
+            exit 1
+          fi
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+
+      - name: List artifacts
+        run: |
+          echo "Contents of build folder:"
+          ls -la build/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.build.outputs.version }}
+          name: Release ${{ steps.build.outputs.version }}
+          body: |
+            ## Release ${{ steps.build.outputs.version }}
+
+            ${{ github.event.inputs.release_notes }}
+
+            ### Artifacts
+            Built for the following platforms:
+            - macOS (AMD64, ARM64)
+            - Linux (AMD64, ARM64)
+            - Windows (AMD64, ARM64)
+          files: build/*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
