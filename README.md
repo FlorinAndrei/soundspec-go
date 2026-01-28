@@ -20,6 +20,8 @@ Click the Releases link to the right on this page. Pick the version of the app f
 
 On macOS and Linux, make it executable: `chmod +x soundspec`
 
+On macOS, if you get a pop-up when you try to run it, see this page: https://support.apple.com/en-us/102445#openanyway
+
 If you type `soundspec` in the terminal and it does something, you're good.
 
 # Usage
