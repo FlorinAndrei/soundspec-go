@@ -14,7 +14,7 @@ This is why this app exists: as an objective check to your subjective impression
 
 Make sure you have ffmpeg installed: https://www.ffmpeg.org/
 
-Open a terminal or the Command Prompt, and try these commands: `ffmpeg` and `ffprobe`. If both commands do something, you're good.
+Open a terminal or the Command Prompt, and try these commands: `ffmpeg` and `ffprobe`. If both commands show their usage message, you're good.
 
 Click the Releases link to the right on this page. Pick the version of the app for your OS (macOS, Linux, Windows) and your CPU (AMD64, ARM64), and download it. Rename it as `soundspec` (or `soundspec.exe` on Windows) and put it anywhere in your PATH.
 
@@ -22,7 +22,7 @@ On macOS and Linux, make it executable: `chmod +x soundspec`
 
 On macOS, if you get a pop-up when you try to run it, see this page: https://support.apple.com/en-us/102445#openanyway
 
-If you type `soundspec` in the terminal and it does something, you're good.
+If you type `soundspec` in the terminal and it shows the usage message, you're good.
 
 # Usage
 
