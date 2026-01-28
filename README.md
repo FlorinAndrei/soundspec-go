@@ -18,6 +18,8 @@ Open a terminal or the Command Prompt, and try these commands: `ffmpeg` and `ffp
 
 Click the Releases link to the right on this page. Pick the version of the app for your OS (macOS, Linux, Windows) and your CPU (AMD64, ARM64), and download it. Rename it as `soundspec` (or `soundspec.exe` on Windows) and put it anywhere in your PATH.
 
+On macOS and Linux, make it executable: `chmod +x soundspec`
+
 If you type `soundspec` in the terminal and it does something, you're good.
 
 # Usage
